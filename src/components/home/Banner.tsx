@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const Banner = () => {
   const navigate = useNavigate();
   return (
-    <div className="mt-20 grid lg:grid-cols-2 grid-cols-1 gap-5  max-w-7xl mx-auto lg:px-0 px-4">
+    <div className="mt-20 grid lg:grid-cols-2 grid-cols-1 gap-5 container mx-auto lg:px-0 px-4">
       <div className=" flex items-center">
         <div>
           {" "}
