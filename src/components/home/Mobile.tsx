@@ -3,7 +3,7 @@ import { IMobile } from "../../interface/mobile";
 
 const Mobile = ({ mobile }: { mobile: IMobile }) => {
   return (
-    <div className="w-full h-full border rounded-2xl shadow">
+    <div className="w-full h-[455px] border rounded-2xl shadow">
       <div className="  h-44  p-3 rounded-xl">
         <img src={mobile.url} className=" rounded-xl h-44 w-full p-2" alt="" />
       </div>
@@ -39,13 +39,19 @@ const Mobile = ({ mobile }: { mobile: IMobile }) => {
           </div>
           <p>{mobile.color}</p>
         </div>
+        <div className="mt-1 flex ">
+          <div className=" w-28">
+            <p>Battery</p>
+          </div>
+          <p>{mobile.batteryCapacity}</p>
+        </div>
       </div>
-      <div className="p-3 mt-1 ">
+      <div className="p-3 mt-8 ">
         <div
           // onClick={() => enrolledmobileHandler(mobile?._id)}
-          className="w-full h-8 cursor-pointer bg-red-500 text-white rounded flex justify-center items-center"
+          className="w-full h-8 cursor-pointer bg-red-500 text-white  flex justify-center items-center rounded-3xl"
         >
-          <button>Enrolled Now</button>
+          <button>Details</button>
         </div>
       </div>
     </div>

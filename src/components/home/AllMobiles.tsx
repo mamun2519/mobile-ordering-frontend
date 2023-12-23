@@ -44,7 +44,7 @@ const AllMobiles = () => {
     query["color"] = colorSelect;
   }
   if (batterySelect) {
-    query["battery"] = batterySelect;
+    query["batteryCapacity"] = batterySelect;
   }
 
   const { data } = useAllMobileQuery(query);
@@ -80,7 +80,9 @@ const AllMobiles = () => {
               {brandCollops &&
                 data?.brand?.map((brand: { title: string }) => (
                   <div
-                    onClick={() => setBrand(brand.title)}
+                    onClick={() =>
+                      setBrand(brand.title === brandSelect ? "" : brand.title)
+                    }
                     className="pt-1 flex gap-4  cursor-pointer"
                     key={brand.title}
                   >
@@ -109,7 +111,9 @@ const AllMobiles = () => {
               {ramCollops &&
                 data?.ram?.map((ram: { title: string }) => (
                   <div
-                    onClick={() => setRam(ram.title)}
+                    onClick={() =>
+                      setRam(ram.title === ramSelect ? "" : ram.title)
+                    }
                     className="pt-1 flex gap-4 cursor-pointer"
                     key={ram.title}
                   >
@@ -136,7 +140,9 @@ const AllMobiles = () => {
               {romCollops &&
                 data?.rom?.map((rom: { title: string }) => (
                   <div
-                    onClick={() => setRom(rom.title)}
+                    onClick={() =>
+                      setRom(rom.title == romSelect ? "" : rom.title)
+                    }
                     className="pt-1 flex gap-4    cursor-pointer"
                     key={rom.title}
                   >
@@ -164,7 +170,9 @@ const AllMobiles = () => {
               {colorCollops &&
                 data?.color?.map((color: { title: string }) => (
                   <div
-                    onClick={() => setColor(color.title)}
+                    onClick={() =>
+                      setColor(color.title === colorSelect ? "" : color.title)
+                    }
                     className="pt-1 flex gap-4 cursor-pointer"
                     key={color.title}
                   >
@@ -193,7 +201,11 @@ const AllMobiles = () => {
               {butteryCollops &&
                 data?.battery?.map((battery: { title: string }) => (
                   <div
-                    onClick={() => setBattery(battery.title)}
+                    onClick={() =>
+                      setBattery(
+                        battery.title == batterySelect ? "" : battery.title
+                      )
+                    }
                     className="pt-1 flex gap-4 cursor-pointer"
                     key={battery.title}
                   >
