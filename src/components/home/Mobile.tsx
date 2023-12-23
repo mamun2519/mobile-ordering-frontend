@@ -1,4 +1,3 @@
-import React from "react";
 import { IMobile } from "../../interface/mobile";
 import { useNavigate } from "react-router-dom";
 

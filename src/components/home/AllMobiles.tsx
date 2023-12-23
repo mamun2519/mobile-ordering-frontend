@@ -63,7 +63,6 @@ const AllMobiles = () => {
     setBattery("");
   };
 
-  console.log(pageLimit);
   return (
     <div className="my-20 container mx-auto lg:px-0 px-4">
       <h3 className="text-center text-3xl ">All Mobiles</h3>
@@ -102,8 +101,8 @@ const AllMobiles = () => {
             <option value="25">25</option>
           </select>
         </div>
-        <div className="flex gap-5 mt-5">
-          <div className=" w-96 border h-full shadow-sm rounded ">
+        <div className="lg:flex gap-5 mt-5">
+          <div className=" lg:w-96 border h-full shadow-sm rounded ">
             <div className=" my-3">
               {" "}
               <div className="p-2">
