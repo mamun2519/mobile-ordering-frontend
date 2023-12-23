@@ -11,10 +11,10 @@ const AllMobiles = () => {
   const [pageLimit, setLimit] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const [brandSelect, setBrand] = useState("");
-  const [ram, setRam] = useState("");
-  const [rom, setRom] = useState("");
-  const [color, setColor] = useState("");
-  const [battery, setBattery] = useState("");
+  const [ramSelect, setRam] = useState("");
+  const [romSelect, setRom] = useState("");
+  const [colorSelect, setColor] = useState("");
+  const [batterySelect, setBattery] = useState("");
   const [brandCollops, setBrandCollapse] = useState(true);
   const [ramCollops, setRamCollapse] = useState(true);
   const [romCollops, setRomCollapse] = useState(false);
@@ -34,17 +34,17 @@ const AllMobiles = () => {
   if (brandSelect) {
     query["brand"] = brandSelect;
   }
-  if (ram) {
-    query["ram"] = ram;
+  if (ramSelect) {
+    query["ram"] = ramSelect;
   }
-  if (rom) {
-    query["rom"] = rom;
+  if (romSelect) {
+    query["rom"] = romSelect;
   }
-  if (color) {
-    query["color"] = color;
+  if (colorSelect) {
+    query["color"] = colorSelect;
   }
-  if (battery) {
-    query["battery"] = battery;
+  if (batterySelect) {
+    query["battery"] = batterySelect;
   }
 
   const { data } = useAllMobileQuery(query);
@@ -74,7 +74,7 @@ const AllMobiles = () => {
                   onClick={() => setBrandCollapse(!brandCollops)}
                   className="text-xl"
                 >
-                  {brandCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {brandCollops ? <IoChevronUpSharp /> : <IoIosArrowDown />}
                 </button>
               </div>
               {brandCollops &&
@@ -103,13 +103,22 @@ const AllMobiles = () => {
                   onClick={() => setRamCollapse(!ramCollops)}
                   className="text-xl"
                 >
-                  {ramCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {ramCollops ? <IoChevronUpSharp /> : <IoIosArrowDown />}
                 </button>
               </div>
               {ramCollops &&
                 data?.ram?.map((ram: { title: string }) => (
-                  <div className="pt-1 flex gap-4" key={ram.title}>
-                    <input type="checkbox" name="" id="" />
+                  <div
+                    onClick={() => setRam(ram.title)}
+                    className="pt-1 flex gap-4 cursor-pointer"
+                    key={ram.title}
+                  >
+                    <input
+                      checked={ramSelect == ram.title ? true : false}
+                      type="checkbox"
+                      name=""
+                      id=""
+                    />
                     {ram.title}
                   </div>
                 ))}
@@ -121,13 +130,23 @@ const AllMobiles = () => {
                   onClick={() => setRomCollapse(!romCollops)}
                   className="text-xl"
                 >
-                  {romCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {romCollops ? <IoChevronUpSharp /> : <IoIosArrowDown />}
                 </button>
               </div>
               {romCollops &&
                 data?.rom?.map((rom: { title: string }) => (
-                  <div className="pt-1 flex gap-4" key={rom.title}>
-                    <input type="checkbox" name="" id="" />
+                  <div
+                    onClick={() => setRom(rom.title)}
+                    className="pt-1 flex gap-4    cursor-pointer"
+                    key={rom.title}
+                  >
+                    <input
+                      checked={romSelect == rom.title ? true : false}
+                      type="checkbox"
+                      name=""
+                      className="cursor-pointer"
+                      id=""
+                    />
                     {rom.title}
                   </div>
                 ))}
@@ -139,13 +158,23 @@ const AllMobiles = () => {
                   onClick={() => setColorCollapse(!colorCollops)}
                   className="text-xl"
                 >
-                  {colorCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {colorCollops ? <IoChevronUpSharp /> : <IoIosArrowDown />}
                 </button>
               </div>
               {colorCollops &&
                 data?.color?.map((color: { title: string }) => (
-                  <div className="pt-1 flex gap-4" key={color.title}>
-                    <input type="checkbox" name="" id="" />
+                  <div
+                    onClick={() => setColor(color.title)}
+                    className="pt-1 flex gap-4 cursor-pointer"
+                    key={color.title}
+                  >
+                    <input
+                      checked={colorSelect == color.title ? true : false}
+                      type="checkbox"
+                      name=""
+                      className="cursor-pointer"
+                      id=""
+                    />
                     {color.title}
                   </div>
                 ))}
@@ -157,14 +186,24 @@ const AllMobiles = () => {
                   onClick={() => setBatteryCollapse(!butteryCollops)}
                   className="text-xl"
                 >
-                  {butteryCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {butteryCollops ? <IoChevronUpSharp /> : <IoIosArrowDown />}
                 </button>
               </div>
               <h3 className=" text-xl"></h3>
               {butteryCollops &&
                 data?.battery?.map((battery: { title: string }) => (
-                  <div className="pt-1 flex gap-4" key={battery.title}>
-                    <input type="checkbox" name="" id="" />
+                  <div
+                    onClick={() => setBattery(battery.title)}
+                    className="pt-1 flex gap-4 cursor-pointer"
+                    key={battery.title}
+                  >
+                    <input
+                      checked={batterySelect == battery.title ? true : false}
+                      type="checkbox"
+                      name=""
+                      id=""
+                      className="cursor-pointer"
+                    />
                     {battery.title}
                   </div>
                 ))}
