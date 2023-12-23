@@ -7,13 +7,49 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoChevronUpSharp } from "react-icons/io5";
 
 const AllMobiles = () => {
-  const [brandCollaps, setBrandCollapse] = useState(true);
-  const [ramCollaps, setRamCollapse] = useState(true);
-  const [romCollaps, setRomCollapse] = useState(false);
-  const [colorCollaps, setColorCollapse] = useState(false);
-  const [butteryCollaps, setBatteryCollapse] = useState(false);
-  const { data } = useAllMobileQuery({ limit: 10 });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageLimit, setLimit] = useState(10);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [brandSelect, setBrand] = useState("");
+  const [ram, setRam] = useState("");
+  const [rom, setRom] = useState("");
+  const [color, setColor] = useState("");
+  const [battery, setBattery] = useState("");
+  const [brandCollops, setBrandCollapse] = useState(true);
+  const [ramCollops, setRamCollapse] = useState(true);
+  const [romCollops, setRomCollapse] = useState(false);
+  const [colorCollops, setColorCollapse] = useState(false);
+  const [butteryCollops, setBatteryCollapse] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const query: Record<string, any> = {};
+  // const handlePageChange = (_event: string, page: number) => {
+  //   setCurrentPage(page);
+  // };
+  query["page"] = currentPage;
+  query["limit"] = pageLimit;
+  //   query["sortBy"] = sortBy;
+  if (searchTerm) {
+    query["searchTerm"] = searchTerm;
+  }
+  if (brandSelect) {
+    query["brand"] = brandSelect;
+  }
+  if (ram) {
+    query["ram"] = ram;
+  }
+  if (rom) {
+    query["rom"] = rom;
+  }
+  if (color) {
+    query["color"] = color;
+  }
+  if (battery) {
+    query["battery"] = battery;
+  }
 
+  const { data } = useAllMobileQuery(query);
+
+  console.log(searchTerm);
   return (
     <div className="my-20 container mx-auto lg:px-0 px-4">
       <h3 className="text-center text-3xl ">All Mobiles</h3>
@@ -24,6 +60,8 @@ const AllMobiles = () => {
             {" "}
             <div className="p-2">
               <input
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                onClick={(e: any) => setSearchTerm(e.target.value)}
                 className="w-full h-12 border outline-blue-300 rounded p-2 text-xl"
                 type="text"
                 placeholder="Search by name"
@@ -33,16 +71,26 @@ const AllMobiles = () => {
               <div className=" flex justify-between items-center">
                 <h3 className=" text-xl">Top Brand</h3>
                 <button
-                  onClick={() => setBrandCollapse(!brandCollaps)}
+                  onClick={() => setBrandCollapse(!brandCollops)}
                   className="text-xl"
                 >
-                  {brandCollaps ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {brandCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
                 </button>
               </div>
-              {brandCollaps &&
+              {brandCollops &&
                 data?.brand?.map((brand: { title: string }) => (
-                  <div className="pt-1 flex gap-4" key={brand.title}>
-                    <input type="checkbox" name="" id="" />
+                  <div
+                    onClick={() => setBrand(brand.title)}
+                    className="pt-1 flex gap-4  cursor-pointer"
+                    key={brand.title}
+                  >
+                    <input
+                      checked={brandSelect == brand.title ? true : false}
+                      type="checkbox"
+                      className=" cursor-pointer"
+                      name=""
+                      id=""
+                    />
                     {brand.title}
                   </div>
                 ))}
@@ -52,13 +100,13 @@ const AllMobiles = () => {
               <div className=" flex justify-between items-center">
                 <h3 className=" text-xl">Category By Ram</h3>
                 <button
-                  onClick={() => setRamCollapse(!ramCollaps)}
+                  onClick={() => setRamCollapse(!ramCollops)}
                   className="text-xl"
                 >
-                  {ramCollaps ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {ramCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
                 </button>
               </div>
-              {ramCollaps &&
+              {ramCollops &&
                 data?.ram?.map((ram: { title: string }) => (
                   <div className="pt-1 flex gap-4" key={ram.title}>
                     <input type="checkbox" name="" id="" />
@@ -70,13 +118,13 @@ const AllMobiles = () => {
               <div className=" flex justify-between items-center">
                 <h3 className=" text-xl">Category By Rom</h3>
                 <button
-                  onClick={() => setRomCollapse(!romCollaps)}
+                  onClick={() => setRomCollapse(!romCollops)}
                   className="text-xl"
                 >
-                  {romCollaps ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {romCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
                 </button>
               </div>
-              {romCollaps &&
+              {romCollops &&
                 data?.rom?.map((rom: { title: string }) => (
                   <div className="pt-1 flex gap-4" key={rom.title}>
                     <input type="checkbox" name="" id="" />
@@ -88,13 +136,13 @@ const AllMobiles = () => {
               <div className=" flex justify-between items-center">
                 <h3 className=" text-xl">Category By Color</h3>
                 <button
-                  onClick={() => setColorCollapse(!colorCollaps)}
+                  onClick={() => setColorCollapse(!colorCollops)}
                   className="text-xl"
                 >
-                  {colorCollaps ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {colorCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
                 </button>
               </div>
-              {colorCollaps &&
+              {colorCollops &&
                 data?.color?.map((color: { title: string }) => (
                   <div className="pt-1 flex gap-4" key={color.title}>
                     <input type="checkbox" name="" id="" />
@@ -106,14 +154,14 @@ const AllMobiles = () => {
               <div className=" flex justify-between items-center">
                 <h3 className=" text-xl">Category By Battery</h3>
                 <button
-                  onClick={() => setBatteryCollapse(!butteryCollaps)}
+                  onClick={() => setBatteryCollapse(!butteryCollops)}
                   className="text-xl"
                 >
-                  {butteryCollaps ? <IoIosArrowDown /> : <IoChevronUpSharp />}
+                  {butteryCollops ? <IoIosArrowDown /> : <IoChevronUpSharp />}
                 </button>
               </div>
               <h3 className=" text-xl"></h3>
-              {butteryCollaps &&
+              {butteryCollops &&
                 data?.battery?.map((battery: { title: string }) => (
                   <div className="pt-1 flex gap-4" key={battery.title}>
                     <input type="checkbox" name="" id="" />
