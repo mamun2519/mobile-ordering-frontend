@@ -1,7 +1,9 @@
 import React from "react";
 import { IMobile } from "../../interface/mobile";
+import { useNavigate } from "react-router-dom";
 
 const Mobile = ({ mobile }: { mobile: IMobile }) => {
+  const navigate = useNavigate();
   return (
     <div className="w-full h-[455px] border rounded-2xl shadow">
       <div className="  h-44  p-3 rounded-xl">
@@ -48,7 +50,7 @@ const Mobile = ({ mobile }: { mobile: IMobile }) => {
       </div>
       <div className="p-3 mt-8 ">
         <div
-          // onClick={() => enrolledmobileHandler(mobile?._id)}
+          onClick={() => navigate(`/mobile/details/${mobile._id}`)}
           className="w-full h-8 cursor-pointer bg-red-500 text-white  flex justify-center items-center rounded-3xl"
         >
           <button>Details</button>
