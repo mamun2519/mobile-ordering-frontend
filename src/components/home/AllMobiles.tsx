@@ -3,8 +3,10 @@ import { IMobile } from "../../interface/mobile";
 import { useAllMobileQuery } from "../../redux/api/mobileApi";
 import Mobile from "./Mobile";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoRefreshSharp } from "react-icons/io5";
 
 import { IoChevronUpSharp } from "react-icons/io5";
+import Loading from "../shared/Loading";
 
 const AllMobiles = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +49,19 @@ const AllMobiles = () => {
     query["batteryCapacity"] = batterySelect;
   }
 
-  const { data } = useAllMobileQuery(query);
+  const { data, isLoading } = useAllMobileQuery(query);
+  if (isLoading) {
+    return <Loading />;
+  }
+  const refreshHandler = () => {
+    setSearchTerm("");
+    setCurrentPage(1);
+    setBrand("");
+    setRam("");
+    setRom("");
+    setColor("");
+    setBattery("");
+  };
 
   console.log(pageLimit);
   return (
@@ -55,10 +69,27 @@ const AllMobiles = () => {
       <h3 className="text-center text-3xl ">All Mobiles</h3>
       <div className=" mt-20">
         <div className=" flex justify-end">
+          {(searchTerm ||
+            brandSelect ||
+            ramSelect ||
+            romSelect ||
+            colorSelect ||
+            batterySelect) && (
+            <div className=" px-4 h-full ">
+              <button
+                onClick={() => refreshHandler()}
+                className=" border flex justify-center items-center h-6  w-8 rounded"
+              >
+                <IoRefreshSharp />
+              </button>
+            </div>
+          )}
+
           <label htmlFor="" className=" pr-2">
             Limit
           </label>
           <select
+            defaultValue={10}
             onChange={(e) => setLimit(Number(e.target.value))}
             className="outline-none bg-red-500 border px-6 py-1 rounded-2xl text-white"
             name="filter"
