@@ -7,7 +7,7 @@ const Banner = () => {
       <div className=" flex items-center">
         <div>
           {" "}
-          <h3 className="text-5xl font-bold">Create Team Enjoy Time</h3>
+          <h3 className="text-5xl font-bold">Smart Mobile App</h3>
           <div className="h-2 bg-red-500 w-28 mt-3"></div>
           <div className="mt-3">
             <p>
@@ -23,7 +23,7 @@ const Banner = () => {
                 onClick={() => navigate("/my-team")}
                 className="px-8 py-2 bg-red-500 text-white rounded-xl"
               >
-                Go Team
+                Buy Mobile
               </button>
             </div>
           </div>
